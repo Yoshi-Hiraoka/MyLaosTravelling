@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>ラオスバックパッカー旅行記</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      label, input, textarea {
+        display: block;
+      }
+      input, textarea, .btn {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      input, .btn {
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+      }
+      input, textarea {
+        border: 1px solid #ccc;
+      }
+      textarea {
+        height: 30em;
+        margin-bottom: 40px;
+        border-radius: 4px;
+      }
+      .btn {
+        text-align: center;
+        background: rgba(65,166,151,1);
+        color: #fff;
+        font-weight: bold;
+        box-shadow: 0 8px rgba(65,100,151,1);
+        cursor: pointer;
+      }
+      .btn:active {
+        position: relative;
+        top: 6px;
+        box-shadow: 0 2px rgba(65,100,151,1);
+      }
+      footer{
+        padding-top: 80px;
+      }
+      @media (min-width: 600px) {
+        .btn {
+          width: 300px;
+          margin: 0 auto;
+        }
+      }
+      @media (min-width: 960px) {
+        .container {
+          width: 700px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+        <p><small>ラオス旅行体験談と情報を綴るお役立ちサイト</small></p>
+        <h1>ラオスバックパッカー旅行記</h1>
+    </header>
+    <form>
+      <div class="container">
+        <label>名前（必須）<input type="text" placeholder="山田太郎"></label>
+        <label>メールアドレス（必須）<input type="text"></label>
+        <label>題名<input type="text"></label>
+        <label>メッセージ本文<textarea></textarea></label>
+        <div class="btn">
+          送信
+        </div>
+      </div>
+    </form>
+    <footer>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="index.html">メインページへ戻る</a></li>
+            <li><a href="../top.html">Yoshi's Profile Siteへ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
