@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>ラオスバックパッカー旅行記</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    main {
+      text-align: center;
+    }
+    main  p {
+      text-align: left;
+    }
+    #thumbnails {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 90px);
+      grid-auto-rows: 60px;
+      grid-gap: 20px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    #thumbnails img {
+      width: 90px;
+      height: 60px;
+      cursor: pointer;
+      margin: 0 20px;
+    }
+    button {
+      cursor:pointer;
+    }
+    #main {
+      width: 100%;
+      height: 500px;
+      position: relative;
+    }
+    #main img {
+      max-height: 100%;
+      max-width: 100%;
+      height: auto;
+      width: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      -webkit-transform: translateY(-50%) translateX(-50%);
+    }
+    #text > p {
+      text-align: center;
+      margin: 0 0 20px;
+    }
+    footer{
+      padding-top: 80px;
+    }
+    </style>
+  </head>
+  <body>
+    <header>
+        <p><small>ラオス旅行体験談と情報を綴るお役立ちサイト</small></p>
+        <h1>ラオスバックパッカー旅行記</h1>
+    </header>
+    <main>
+      <div class="container">
+        <h2>旅の写真〜ビエンチャン編〜</h2>
+        <p>ビエンチャンはラオスの首都であり、ラオス最大の都市です。最大の都市とはいっても人口は約70万人で、それほど大都市という印象ではありませんでした。
+          とはいえ、中心部にはたくさんのレストランや整備の行き届いた公園があり、タート・ルアンをはじめ、たくさんの寺院が点在しています。<br>
+          こちらのページでは、管理人が実際に食べたローカルフードや観光スポットの写真を掲載しています。
+        </p>
+        <div id="main">
+          <!-- <img src="" alt=""> -->
+        </div>
+        <div id="text">
+          <!-- <p></p> -->
+        </div>
+        <div id="thumbnails">
+        </div>
+        <div class="btn">
+          <button id="prev">&laquo;前へ</button>
+          <button id="next">次へ&raquo;</button>
+          <button id="play">再生</button>
+          <button id="stop">停止</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="index.html">メインページへ戻る</a></li>
+            <li><a href="../top.html">Yoshi's Profile Siteへ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      'use strict';
+
+      {
+        const thumbnails = document.getElementById('thumbnails');
+        const main = document.getElementById('main');
+        const text = document.getElementById('text');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+        const play = document.getElementById('play');
+        const stop = document.getElementById('stop');
+
+        const images = [
+          {p: 'img/img1-0.jpeg', t: '市街地を歩いている時にたまたま入った寺院。こういうところがたくさんありました。'},
+          {p: 'img/img1-1.jpeg', t: '有名な観光地ブッダパークです。'},
+          {p: 'img/img1-2.jpeg', t: 'ラオスの名物「ラープ」です。新鮮な野菜とひき肉のサラダです。もち米のような米と供されます。'},
+          {p: 'img/img1-3.jpeg', t: 'タート・ルアンです。遠くからでも目立ちます。'},
+          {p: 'img/img1-4.jpeg', t: 'ビエンチャン北バスターミナルの近くにあった巨大な猫のオブジェです。'},
+          {p: 'img/img1-5.jpeg', t: 'アヌサーワリー・パトゥーサイ。内戦終結を記念して建てられたそうです。'},
+          {p: 'img/img1-6.jpeg', t: 'ラオスの人たちはとても信心深いようです。'},
+          {p: 'img/img1-7.jpeg', t: 'こちらもブッダパーク。どういう発想で作ったのでしょうか。おもしろいです。'}
+        ];
+
+        let currentNum = 0;
+        let timeoutId;
+        let nowPlaying = false;
+
+        const mainImage = document.createElement('img');
+        const textMessage = document.createElement('p');
+        mainImage.src = images[currentNum].p;
+        textMessage.textContent = images[currentNum].t
+        main.appendChild(mainImage);
+        text.appendChild(textMessage);
+
+        function removeText() {
+          while (text.firstChild) {
+            text.removeChild(text.firstChild);
+          }
+        }
+
+        images.forEach((image, index) => {
+          const img = document.createElement('img');
+          const message = document.createElement('p');
+          img.src = image.p;
+          message.textContent = image.t;
+          thumbnails.appendChild(img);
+          img.addEventListener('click', () => {
+            mainImage.src = img.src;
+            removeText();
+            text.appendChild(message);
+            currentNum = index;
+          });
+        });
+
+        prev.addEventListener('click', () => {
+          currentNum--;
+          if (currentNum < 0) {
+            currentNum = images.length - 1;
+          }
+          mainImage.src = images[currentNum].p;
+          textMessage.textContent= images[currentNum].t;
+          main.appendChild(mainImage);
+          removeText();
+          text.appendChild(textMessage);
+        });
+
+        next.addEventListener('click', () => {
+          currentNum++;
+          if (currentNum > images.length - 1) {
+            currentNum = 0;
+          }
+          mainImage.src = images[currentNum].p;
+          textMessage.textContent= images[currentNum].t;
+          main.appendChild(mainImage);
+          removeText();
+          text.appendChild(textMessage);
+        });
+
+        function autoPlay() {
+          next.click();
+          timeoutId = setTimeout(() => {
+            autoPlay();
+          },3000);
+        }
+
+        play.addEventListener('click', () => {
+          if (nowPlaying) {
+            return;
+          } else {
+            nowPlaying = true;
+            autoPlay();
+          }
+        });
+
+        stop.addEventListener('click', () => {
+          nowPlaying = false;
+          clearTimeout(timeoutId);
+        });
+
+      }
+    </script>
+  </body>
+</html>
